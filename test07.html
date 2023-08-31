@@ -10,13 +10,7 @@
         function printStudent(){
             var newNode = "";
             for(var i=0; i<stu.length; i++){
-                newNode += '<tr>';
-                newNode += `<th scope="row">${i+1}</th>`;
-                newNode += getStuName`<td>${stu[i].name}</td>`;
-                newNode += `<td>${stu[i].kor}</td>`;
-                newNode += `<td>${stu[i].eng}</td>`;
-                newNode += `<td>${stu[i].math}</td>`;
-                newNode += '</tr>';
+                newNode += stu[i].printInfo(i);
             }
             return newNode;
         }
@@ -72,6 +66,16 @@
                 this.kor = kor;
                 this.eng = eng;
                 this.math = math;
+            }
+            printInfo(num){
+                var newNode = '<tr>';
+                newNode += `<th scope="row">${num+1}</th>`;
+                newNode += getStuName`<td>${this.name}</td>`;
+                newNode += `<td>${this.kor}</td>`;
+                newNode += `<td>${this.eng}</td>`;
+                newNode += `<td>${this.math}</td>`;
+                newNode += '</tr>';
+                return newNode;
             }
         }
         var stu = [new Student('홍길동', 100, 90, 80), 
