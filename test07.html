@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+        function addStudent(){
+            const name = document.getElementById('name').value;
+            const kor = document.getElementById('kor').value;
+            const eng = document.getElementById('eng').value;
+            const math = document.getElementById('math').value;
+            var tbody = document.querySelector('tbody');
+            var tr1 = document.createElement('tr');
+            var th1 = document.createElement('th');
+            var td1 = document.createElement('td');  td1.textContent = name;
+            var td2 = document.createElement('td');  td2.textContent = kor;
+            var td3 = document.createElement('td');  td3.textContent = eng;
+            var td4 = document.createElement('td');  td4.textContent = math;
+            tr1.appendChild(th1);  tr1.appendChild(td1);  tr1.appendChild(td2);
+            tr1.appendChild(td3);  tr1.appendChild(td4);
+            var lastChild = tbody.lastChild;
+            var firstChild = lastChild.firstChild;
+            th1.textContent = Number(firstChild.textContent)+1
+            tbody.appendChild(tr1);
+            // var tbodyTag = document.getElementsByTagName('tbody');
+            // tbodyTag[0].innerHTML = `<tr><th>4</th><td>${name}</td><td>${kor}</td><td>${eng}</td><td>${math}</td></tr>`;
+        }
+    </script>
+</head>
+<body>
+    <div class="input-group">
+        <span class="input-group-text">학생이름</span>
+        <input type="text" class="form-control" id="name">
+        <span class="input-group-text">국어점수</span>
+        <input type="text" class="form-control" id="kor">
+        <span class="input-group-text">영어점수</span>
+        <input type="text" class="form-control" id="eng">
+        <span class="input-group-text">수학점수</span>
+        <input type="text" class="form-control" id="math">
+        <button type="button" class="btn btn-primary" onclick="addStudent();">추가</button>
+    </div>
+    <script>
+        
+        class Student{
+            constructor(name, kor, eng, math){
+                this.name = name;
+                this.kor = kor;
+                this.eng = eng;
+                this.math = math;
+            }
+        }
+        var stu = [new Student('홍길동', 100, 90, 80), 
+                  new Student('이순신', 90, 88, 99),
+                  new Student('유관순', 92, 95, 96)];
+        function getStuName(strings, name){ // 템플릿 리터럴에서 파싱할 함수
+            if(name == '이순신'){
+                return strings[0] + name+'장군님' + strings[1];
+            }
+            return strings[0] + name+'님' + strings[1];
+        }
+
+        document.write('<table class="table table-striped">');
+        document.write('<thead>');
+        document.write('<tr>');
+        document.write('<th scope="col">번호</th>');
+        document.write('<th scope="col">이름</th>');
+        document.write('<th scope="col">국어</th>');
+        document.write('<th scope="col">영어</th>');
+        document.write('<th scope="col">수학</th>');
+        document.write('</tr>');
+        document.write('</thead>');
+        document.write('<tbody>');
+        for(var i=0; i<stu.length; i++){
+            document.write('<tr>');
+            //`${i+1}`   // 템플릿 리터럴
+            document.write(`<th scope="row">${i+1}</th>`);
+            document.write(getStuName`<td>${stu[i].name}</td>`);
+            document.write(`<td>${stu[i].kor}</td>`);
+            document.write(`<td>${stu[i].eng}</td>`);
+            document.write(`<td>${stu[i].math}</td>`);
+            document.write('</tr>');
+        }
+        document.write('</tbody>');
+        document.write('</table>');
+    </script>
+</body>
+</html>
