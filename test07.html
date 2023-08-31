@@ -45,6 +45,12 @@
             var tbodyTag = document.getElementsByTagName('tbody')[0];
             tbodyTag.innerHTML = printStudent();
         }
+        function modify(){
+            console.log('modify button');
+        }
+        function remove(){
+            console.log('remove button');
+        }
     </script>
 </head>
 <body>
@@ -74,6 +80,8 @@
                 newNode += `<td>${this.kor}</td>`;
                 newNode += `<td>${this.eng}</td>`;
                 newNode += `<td>${this.math}</td>`;
+                newNode += '<td><button type="button" class="btn btn-link" onclick="modify()">수정</button></td>';
+                newNode += `<td><button type="button" class="btn btn-link" onclick="remove()">삭제</button></td>`;
                 newNode += '</tr>';
                 return newNode;
             }
@@ -96,6 +104,8 @@
         document.write('<th scope="col">국어</th>');
         document.write('<th scope="col">영어</th>');
         document.write('<th scope="col">수학</th>');
+        document.write('<th scope="col">수정</th>');
+        document.write('<th scope="col">삭제</th>');
         document.write('</tr>');
         document.write('</thead>');
         document.write('<tbody>');
