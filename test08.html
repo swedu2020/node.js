@@ -15,15 +15,13 @@
     </style>
 </head>
 <body>
-    <script>
-
-    </script>
+    
     <div class="container text-center">
     <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="사용자 아이디">
+        <input type="text" class="form-control" placeholder="사용자 아이디" id="userid">
       </div>
       
       <div class="input-group mb-3">
@@ -121,11 +119,51 @@
         </div>
       </div>
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">회원가입</button>
+        <button class="btn btn-primary" type="button" id="memberJoinBtn">회원가입</button>
       </div>
     </div>
     <div class="col-3"></div>
     </div>
     </div>
+    <script>
+        const memberJoinBtn = document.querySelector('#memberJoinBtn');
+        const userid = document.querySelector('#userid');
+        memberJoinBtn.onclick = function(){
+            console.log("memberJoinBtn click..");
+        }
+        memberJoinBtn.onclick = (e, e2)=>{
+            console.log("memberJoinBtn click..2");
+            console.dir(e);
+            console.dir(e2);
+        }
+        memberJoinBtn.addEventListener('mouseup', (event)=>{
+            console.log("memberJoinBtn mouseup");
+            console.dir(event);
+        });
+        memberJoinBtn.addEventListener('mousedown', (event)=>{
+            console.log("memberJoinBtn mousedown");
+            console.dir(event);
+        });
+        memberJoinBtn.addEventListener('dblclick', (event)=>{
+            console.log("memberJoinBtn dblclick");
+            console.dir(event);
+        });
+        userid.addEventListener('keydown', (event)=>{
+            console.log("userid keydown");
+            console.dir(event);
+        });
+        userid.addEventListener('keyup', (event)=>{
+            console.log("userid keyup");
+            console.dir(event);
+        });
+        userid.addEventListener('pointerup', (event)=>{
+            console.log("userid pointerup");
+            console.dir(event);
+        });
+        userid.addEventListener('change', (event)=>{
+            console.log("userid change");
+            console.dir(event);
+        });
+    </script>
 </body>
 </html>
