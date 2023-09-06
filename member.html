@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+        function printMember(){
+            var newNode = "";
+            for(var i=0; i<member.length; i++){
+                newNode += member[i].printInfo(i);
+            }
+            return newNode;
+        }
+
+        function addMember(){
+            // 사용자가 입력한 정보
+            const name = document.getElementById('name').value;
+            const id = document.querySelector('#id').value;
+            const pw = document.querySelector('#pw').value;
+            const pw2 = document.querySelector('#pw2').value;
+            const email = document.querySelector('#email').value;
+            const tel = document.querySelector('#tel').value;
+            const gender = document.querySelector('input[name="genderOption"]:checked');
+            if(name=='' || id=='' || pw=='' || pw2=='' || email=='' || tel=='' || gender==''){
+                alert('모든 사용자 정보를 입력하시오.');
+                return; // 함수종료
+            }
+            if(pw!=pw2){
+                alert('입력한 패스워드 두개가 다릅니다.');
+                return; // 함수종료
+            }
+            // 객체에 데이터 추가
+            member.push(new Member(name, id, pw, email, tel, gender.value));
+            
+            // tbody 태그안에 innerHTML 속성으로 객체 정보를 갱신
+            var tbodyTag = document.getElementsByTagName('tbody')[0];
+            tbodyTag.innerHTML = printMember();
+        }
+        function goSearch(name){
+            open('https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query='+name, 'search', 'popup')
+        }
+    </script>
+</head>
+<body>
+    <div class="input-group">
+        <span class="input-group-text">이름</span>
+        <input type="text" class="form-control" id="name">
+        <span class="input-group-text">아이디</span>
+        <input type="text" class="form-control" id="id">
+        <span class="input-group-text">비밀번호</span>
+        <input type="password" class="form-control" id="pw">
+        <span class="input-group-text">비밀번호 확인</span>
+        <input type="password" class="form-control" id="pw2">
+    </div>
+    <div class="input-group">   
+        <span class="input-group-text">이메일</span>
+        <input type="email" class="form-control" id="email">
+        <span class="input-group-text">전화번호</span>
+        <input type="tel" class="form-control" id="tel">
+        <span class="input-group-text">성별</span>
+        <div class="form-control">
+            <input class="form-check-input" type="radio" name="genderOption" id="inlineRadio1" value="male">
+            <label class="form-check-label" for="inlineRadio1">남자</label>
+        </div>
+        <div class="form-control">
+            <input class="form-check-input" type="radio" name="genderOption" id="inlineRadio2" value="female">
+            <label class="form-check-label" for="inlineRadio2">여자</label>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="addMember();">추가</button>
+    </div>
+    <script>
+        class Member{
+            constructor(name, id, pw, email, tel, gender){
+                this.name = name;
+                this.id = id;
+                this.pw = pw;
+                this.email = email;
+                this.tel = tel;
+                this.gender = gender;
+            }
+            printInfo(num){
+                var newNode = '<tr>';
+                newNode += `<th scope="row">${num+1}</th>`;
+                newNode += `<td><div style="cursor:pointer" onclick="goSearch('${this.name}')">${this.name}</div></td>`;
+                newNode += `<td>${this.id}</td>`;
+                newNode += `<td>${this.email}</td>`;
+                newNode += `<td>${this.tel}</td>`;
+                newNode += `<td>${this.gender}</td>`;
+                newNode += '</tr>';
+                return newNode;
+            }
+        }
+        var member = [];
+
+        document.write('<table class="table table-striped">');
+        document.write('<thead>');
+        document.write('<tr>');
+        document.write('<th scope="col">번호</th>');
+        document.write('<th scope="col">이름</th>');
+        document.write('<th scope="col">아이디</th>');
+        document.write('<th scope="col">이메일</th>');
+        document.write('<th scope="col">전화번호</th>');
+        document.write('<th scope="col">성별</th>');
+        document.write('</tr>');
+        document.write('</thead>');
+        document.write('<tbody>');
+        document.write(printMember());
+        document.write('</tbody>');
+        document.write('</table>');
+    </script>
+</body>
+</html>
