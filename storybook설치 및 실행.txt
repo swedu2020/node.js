@@ -1,0 +1,6 @@
+storybook 설치
+npx storybook@latest init
+
+storybook 실행
+npm run storybook  또는 yarn storyboook
+
