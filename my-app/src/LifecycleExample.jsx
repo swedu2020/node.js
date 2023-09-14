@@ -22,9 +22,16 @@ class LifecycleExample extends Component {
     }
     componentDidMount(){ // render()함수로 화면이 그려진 후 동작
         console.log('componentDidMount 호출');
+        this.forceUpdate();
+        // this.setState({
+        //     updated: true
+        // });
     }
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState, snapshot){
         console.log('componentDidUpdate 호출');
+        console.dir(prevProps);
+        console.dir(prevState);
+        console.dir(snapshot);
     }
     componentWillUnmount(){
         console.log('componentWillUnmount 호출');
@@ -39,10 +46,11 @@ class LifecycleExample extends Component {
         console.log('shouldComponentUpdate 호출');
         console.log(this.props, nextProps);
         console.log(this.state, nextState);
-        if(this.state.num == nextState.num){
-            return false;
-        }
-        return true;
+        return false;
+        // if(this.state.num == nextState.num){
+        //     return false;
+        // }
+        // return true;
     }
 
     render() {
